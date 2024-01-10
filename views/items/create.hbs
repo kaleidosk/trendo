@@ -1,0 +1,44 @@
+<h2>Create a new item</h2>
+
+<form action="/item-create" method="POST">
+  <label> Name:
+    <input type="text" name="name" />
+  </label>
+  <br>
+
+  <label> Description:
+    <textarea type="text" name="description"> </textarea>
+  </label>
+  <br>
+
+<label> Image:
+<input
+      id="image"
+      type="file"
+      accept="image/png/image/jpeg"
+       />
+</label>
+<br>
+
+
+{{!--******* HELP PLEASE *************************************
+how I can create a label owner prefilled with this.username? it doesn't add the item to the owner
+and how can I show the image?? Multer??
+<label name="owner"> Owned by:{{dbUser.username}}</label>
+<br/>--}}
+
+<label name="owner"> Owned by:{{dbUser.username}}</label>
+<br/>
+
+{{!-- <label for="owner-select"> Owned by:
+    <select name="owner">
+      <option disable selected value=""></option>
+      {{#each dbUser}}
+        <option value="{{this._id}}"> {{this.username}} </option>
+      {{/each}}
+    </select>
+  </label>
+  <br> --}}
+
+  <button type="submit"> Add the item </button>
+</form>

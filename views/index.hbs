@@ -1,0 +1,7 @@
+{{!-- <h1>{{appTitle}} 🚀</h1> --}}
+<p>Home page</p>
+<h1>Available Items</h1>
+
+{{#each items}}
+    <h3><a href="/items/{{_id}}">{{name}}</a></h3>
+{{/each}}

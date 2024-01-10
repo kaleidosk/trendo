@@ -1,0 +1,19 @@
+{{#if username}}
+<h1>Welcome to your profile page {{username}}!</h1>
+<div>
+<h1> Available items</h1>
+
+</div>
+{{#each items}}
+<li>Name: {{name}}</li>
+<li>Description: {{description}}</li>
+<li>Image: {{image}}</li>
+{{/each}}
+<div> 
+
+
+{{else}}
+  <p>Still not logged in, sorry!</p>
+{{/if}}
+
+<a href="/item-create">Add a new item</a>
