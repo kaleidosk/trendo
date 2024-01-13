@@ -1,8 +1,8 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
+    imageUrl:{type:String},
     username: {
       type: String,
       required: false,
@@ -20,6 +20,8 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    borrowedItems:[{type:Schema.Types.ObjectId, ref:'Item'}],
+    createdItems:[{type:Schema.Types.ObjectId, ref:'Item'}]
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`

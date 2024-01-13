@@ -4,10 +4,10 @@ const itemSchema = new Schema(
   {
     name: String,
     description: String,
-    image:String, 
-//********HELP PLEASE********/
-    owner: {type: Schema.Types.ObjectId, ref: "User" },
-    client: {type: Schema.Types.ObjectId, ref: "User" }
+    imageUrl:String, 
+
+    ownerId: {type: Schema.Types.ObjectId, ref: "User", required: true},
+    borrowerId: {type: Schema.Types.ObjectId, ref: "User" }
   },
   {
     timestamps: true

@@ -1,6 +1,6 @@
 <h2>Create a new item</h2>
 
-<form action="/item-create" method="POST">
+<form action="/item-create" method="POST" enctype="multipart/form-data">
   <label> Name:
     <input type="text" name="name" />
   </label>
@@ -12,10 +12,7 @@
   <br>
 
 <label> Image:
-<input
-      id="image"
-      type="file"
-      accept="image/png/image/jpeg"
+<input type="file" name="itemImage"
        />
 </label>
 <br>

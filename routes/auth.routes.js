@@ -132,36 +132,32 @@ router.post("/login", isLoggedOut, (req, res, next) => {
             return;
           }
 
-          
-
           // Add the user object to the session object
           req.session.currentUser = user.toObject();
           // Remove the password field
           delete req.session.currentUser.password;
-      
-          
-//const {userId}={_id:user.id}
-//Item.find({owner: userId})
-//.then (allUserItems => {
-//res.render('auth/profile', {items:allUserItems})
-//})
-//.catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
-//})})
-//.catch((err) => next(err))
-//});   
 
-const {username} = req.body
-User.findOne({username})
-// //User.findById({user.id})
-// .populate ('items')
-.then (foundUser => res.render('auth/profile', foundUser))
-.catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
+          res.redirect (`/profile/${user.username}`)
+
+          .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
 })
 .catch((err) => next(err))
 })
 })
 
+      
+//GET PROFILE PAGE ROUTE
+router.get("/profile/:username",isLoggedIn, async (req, res, next) => {
+let itemsOwned= await Item.find({ownerId:req.session.currentUser._id})
+console.log ('itemsOwned',itemsOwned)
+console.log('req.session.currentUser._id', req.session.currentUser._id)
+const { username } = req.params;
+let foundUser= await User.findOne({ username })
+res.render('auth/profile', {user: foundUser, items: itemsOwned})
+})
 
+
+    
 // GET /auth/logout
 router.get("/logout", isLoggedIn, (req, res) => {
   req.session.destroy((err) => {
