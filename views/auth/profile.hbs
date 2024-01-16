@@ -1,21 +1,28 @@
 {{#if user.username}}
 <h1>Welcome to your profile page {{user.username}}!</h1>
+<img src="{{user.imageUrl}}" class="img-fluid" alt="{{user.username}}" />
 <div>
 <h1> Available items</h1>
-
 </div>
+<div class="row">
 {{#each items}}
-<li>Name: {{name}}</li>
-<li>Description: {{description}}</li>
-<li>Image:<img src="{{imageUrl}}" />
-
-</li>
+<div class="col-md-4 mb-5">
+<div class="card" style="width: 18rem;">
+<img src="{{imageUrl}}"class="card-img-top" alt="{{name}}" />
+<h6 class="card-title">Name: {{name}}</h6> 
+<p class="card-text">Category: {{category}}</p>
+<p class="card-text">Description: {{description}}</p>
+<p class="card-text">Price: {{price}} € per day</p>
+</div>
+      </div>
+    </div>
 {{/each}}
 <div> 
-{{!-- **********************HELP It is not showing the items --}}
-
 {{else}}
   <p>Still not logged in, sorry!</p>
+    </div>
 {{/if}}
 
-<a href="/item-create">Add a new item</a>
+<a href="/item-create" class="btn btn-primary">Add a new item</a>
+
+<h1> Borrowed items</h1>

@@ -25,9 +25,9 @@ User.findById(req.session.currentUser._id)
 // <form action="/item-create" method="POST">
 
 router.post("/item-create",fileUploader.single('itemImage'),(req, res) => {
-    const { name, description} = req.body;
+    const {name,description,price,category} = req.body;
     console.log('req.file',req.file)
-    Item.create({name, description,imageUrl: req.file.path,ownerId:req.session.currentUser._id}) //1. Create a new Item 
+    Item.create({name, description,price,category,imageUrl: req.file.path,ownerId:req.session.currentUser._id}) //1. Create a new Item 
     .then(dbItem => {
       // when the new item is created, the user needs to be found and its item updated with the
       // ID of newly created item

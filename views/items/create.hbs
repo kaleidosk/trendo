@@ -1,22 +1,46 @@
 <h2>Create a new item</h2>
-
+<div class="row">
+   <div class="col-md-6">
 <form action="/item-create" method="POST" enctype="multipart/form-data">
-  <label> Name:
-    <input type="text" name="name" />
-  </label>
-  <br>
-
-  <label> Description:
-    <textarea type="text" name="description"> </textarea>
-  </label>
-  <br>
-
+ 
+<div class="form-group">
 <label> Image:
-<input type="file" name="itemImage"
-       />
+<input type="file" name="itemImage"class="form-control-file"/>
 </label>
+</div>
 <br>
 
+ <div class="form-group">
+  <label> Name:
+    <input type="text" name="name"class="form-control" />
+  </label>
+  </div>
+  <br>
+
+<div class="form-group">
+  <label> Description:
+    <textarea type="text" name="description"cols="30" rows="4" class="form-control"> </textarea>
+  </label>
+  </div>
+  <br>
+
+  <div class="form-group">
+  <label> Price:
+    <input type="number" name="price"class="form-control"/> 
+    <label>per day</label>
+  </label>
+  </div>
+  <br>
+
+<div class="form-group">
+<label for="category-select"class="form-control">Choose one category:</label>
+<select name="category">
+  <option value="Bag"> Bag </option>
+  <option value="Jacket"> Jacket </option>
+  <option value="Hat"> Hat</option>
+  <option value="Dress"> Dress </option>
+</select>
+</div>
 
 {{!--******* HELP PLEASE *************************************
 how I can create a label owner prefilled with this.username? it doesn't add the item to the owner
@@ -24,8 +48,8 @@ and how can I show the image?? Multer??
 <label name="owner"> Owned by:{{dbUser.username}}</label>
 <br/>--}}
 
-<label name="owner"> Owned by:{{dbUser.username}}</label>
-<br/>
+{{!-- <label name="owner"> Owned by:{{dbUser.username}}</label>
+<br/> --}}
 
 {{!-- <label for="owner-select"> Owned by:
     <select name="owner">
@@ -37,5 +61,7 @@ and how can I show the image?? Multer??
   </label>
   <br> --}}
 
-  <button type="submit"> Add the item </button>
+  <button type="submit" class="btn btn-primary"> Add the item </button>
 </form>
+</div>
+</div>
