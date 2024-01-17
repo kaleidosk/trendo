@@ -42,5 +42,74 @@ router.post("/item-create",fileUploader.single('itemImage'),(req, res) => {
     });
   })
   
+  //GET route to the item detail page
+  router.get('/items/:itemId', (req, res)=>{
+    const {itemId} = req.params;
+  
+    Item.findById(itemId)
+        .populate('ownerId')
+        .then((item)=>{
+          console.log('item', item)
+          res.render('items/details', item)
+        })
+  })
+
+  //GET route to the item edit page
+  router.get('/items/:itemId/edit', (req, res) => {
+    const {itemId} = req.params;
+    Item.findById(itemId)
+      .then(item => res.render('items/edit', item))
+      .catch(error => console.log(`Error while getting an item for edit: ${error}`));
+  });
+
+  
+// POST route to save changes after updating the item
+router.post('/items/:itemId/edit', fileUploader.single('itemImage'), (req, res) => {
+  const { itemId } = req.params;
+  const { name,description, price,category } = req.body;
+ 
+  let imageUrl;
+  if (req.file) {
+    imageUrl = req.file.path;
+  } else {
+    imageUrl = existingImage;
+  }
+ 
+  Item.findByIdAndUpdate(id, { name, description, price,category }, { new: true })
+    .then(() => res.redirect('/items/:itemId'))
+    .catch(error => console.log(`Error while updating a single movie: ${error}`));
+});
+
+
+//POST route to delete an item
+router.post('/items/:itemId/delete', (req,res)=>{
+const {itemId} =req.params;
+console.log ('itemId',itemId)
+Item.findByIdAndDelete (itemId)
+.then (()=> res.redirect (`/profile/${req.session.currentUser.username}`))
+console.log('req.session.currentUser.username',req.session.currentUser.username)
+.catch (err => console.log('error while deleting the item'))
+})
+
+
+//GET route to rent an item
+router.get ('/items/:itemId/rent'), (req,res,next)=>{
+  const {itemId} = req.params;
+  Item.findById(itemId)
+  .populate('borrowerId')
+  //1. remove the item from the array of his ownerId
+  .then(foundItem=> {
+    console.log ('foundItem',foundItem)
+return User.findOne({_id:ownerId}, { $pull: { createdItems:foundItem._id } }); 
+ })
+  //2. push the item in the borrowedItems of the user loggedIn
+     .then(foundItem=> {
+return User.findByIdAndUpdate(req.session.currentUser._id, { $push: { borrowedItems:foundItem._id } }); 
+  })
+   //3. redirect to the profile page of the loggedin user
+ .then (()=> res.render ('auth/profile',{foundItem,user:req.session.currentUser}))
+    }
+
+
 
 module.exports = router;

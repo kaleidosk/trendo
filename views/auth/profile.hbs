@@ -10,9 +10,14 @@
 <div class="card" style="width: 18rem;">
 <img src="{{imageUrl}}"class="card-img-top" alt="{{name}}" />
 <h6 class="card-title">Name: {{name}}</h6> 
-<p class="card-text">Category: {{category}}</p>
+<a href="/items/{{_id}}/edit" class="btn btn-primary">Edit</a>
+<form action="/items/{{_id}}/delete" class="btn btn-primary" method="POST">
+      <button>Delete</button>
+    </form>
+
+{{!-- <p class="card-text">Category: {{category}}</p>
 <p class="card-text">Description: {{description}}</p>
-<p class="card-text">Price: {{price}} € per day</p>
+<p class="card-text">Price: {{price}} € per day</p> --}}
 </div>
       </div>
     </div>
@@ -26,3 +31,4 @@
 <a href="/item-create" class="btn btn-primary">Add a new item</a>
 
 <h1> Borrowed items</h1>
+

@@ -1,0 +1,54 @@
+<h2>Update item</h2>
+<div class="row">
+  <div class="col-md-6">
+    <form action="/items/{{_id}}/edit" method="post" enctype="multipart/form-data">
+      <div class="form-group">
+
+<div class="form-group">
+<label> Image:
+<input type="file" name="itemImage"class="form-control-file"/>
+<input type="text" name="existingImage" hidden value="{{imageUrl}}">
+</label>
+</div>
+<br>
+
+      
+<div class="form-group">
+  <label> Name:
+    <input type="text" name="name"class="form-control" value="{{name}}" />
+  </label>
+  </div>
+  <br>
+ 
+      <div class="form-group">
+        <label>Description:
+          <textarea name="description" cols="30" rows="4" class="form-control">{{description}}
+          </textarea>
+        </label>
+      </div>
+ 
+
+  <div class="form-group">
+  <label> Price:
+    <input type="number" name="price"class="form-control" value="{{price}}"/> 
+    <label>per day</label>
+  </label>
+  </div>
+  <br>
+
+<div class="form-group">
+<label for="category-select"class="form-control">Choose one category:</label>
+<select name="category">
+  <option value="Bag"> Bag </option>
+  <option value="Jacket"> Jacket </option>
+  <option value="Hat"> Hat</option>
+  <option value="Dress"> Dress </option>
+</select>
+</div>
+
+
+ <button type="submit" class="btn btn-success">Save changes</button>
+ 
+    </form>
+  </div>
+</div>
