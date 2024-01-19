@@ -9,7 +9,7 @@ const itemSchema = new Schema(
     category:String,
   
     ownerId: {type: Schema.Types.ObjectId, ref: "User", required: true},
-    borrowerId: {type: Schema.Types.ObjectId, ref: "User" }
+    borrowerId: {type: Schema.Types.ObjectId, ref: "User"}
   },
   {
     timestamps: true
