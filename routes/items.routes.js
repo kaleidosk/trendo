@@ -27,7 +27,8 @@ User.findById(req.session.currentUser._id)
 router.post("/item-create",fileUploader.single('itemImage'),(req, res) => {
     const {name,description,price,category} = req.body;
     console.log('req.file',req.file)
-    Item.create({name, description,price,category,imageUrl: req.file.path,ownerId:req.session.currentUser._id}) //1. Create a new Item 
+    Item.create({name, description,price,category,imageUrl: req.file.path,ownerId:req.session.currentUser._id}) 
+    //1. Create a new Item 
     .then(dbItem => {
       // when the new item is created, the user needs to be found and its item updated with the
       // ID of newly created item
@@ -45,6 +46,7 @@ router.post("/item-create",fileUploader.single('itemImage'),(req, res) => {
   //GET route to the item detail page
   router.get('/items/:itemId', (req, res)=>{
     const {itemId} = req.params;
+  rs
   
     Item.findById(itemId)
         .populate('ownerId')
@@ -95,34 +97,67 @@ console.log('req.session.currentUser.username',req.session.currentUser.username)
 //GET route to rent an item
 router.get ('/items/:itemId/rent',(req,res,next)=>{
   const {itemId} = req.params;
-  Item.findById(itemId)
+Item.findById(itemId)
   //1. remove the item from the array of his ownerId
   .then(foundItem=> {
     console.log ('foundItem remove the item',foundItem)
 return User.findByIdAndUpdate({_id:foundItem.ownerId}, { $pull: { createdItems:foundItem._id } })
  })
   //2. push the item in the borrowedItems of the user loggedIn
-  
   Item.findById(itemId)
      .then(foundItem=> {
       console.log ('foundItem',foundItem)
 return User.findByIdAndUpdate({_id:req.session.currentUser._id}, { $push: { borrowedItems:foundItem._id } }
   )
   })
-
 //3. Add borrowerId to the item
 Item.findById(itemId)
      .then(foundItem=> {
       console.log ('foundItem n.3',foundItem)
 return Item.findByIdAndUpdate(itemId,{borrowerId:req.session.currentUser._id})
      })
-  
 
-  //4. redirect to the profile page of the loggedin user and pass the added item to show it in .hbs
+  //4. redirect to the profile page of the loggedin user
 .then (()=> { 
- res.render ('auth/profile',{user:req.session.currentUser})})
+ //
+ res.redirect (`/profile/${req.session.currentUser.username}`)
+})
    })
     
+
+//POST ROUTE TO RETURN THE ITEM
+router.post('/items/:itemId/return', (req,res)=>{
+  const {itemId} =req.params;
+  console.log ('itemId',itemId)
+  Item.findById(itemId)
+
+  //1. Show the pagfe
+  //1.remove the item from the array of his borrower
+  .then(foundItem=> {
+return User.findByIdAndUpdate({_id:req.session.currentUser._id},{ $pull: { borrowedItems:foundItem._id } })
+ })
+  //2. push the item in the createdItems of the owner
+  Item.findById(itemId)
+     .then(foundItem=> {
+      console.log ('foundItem',foundItem)    
+return User.findByIdAndUpdate({_id: foundItem.ownerId}, { $push: { createdItems:foundItem._id } }
+  //console.log ("foundItem.ownerId",foundItem.ownerId)
+  )
+  })
+//3. Remove borrowerId from the item
+Item.findById(itemId)
+     .then(foundItem=> {
+      console.log ('foundItem n.3',foundItem)
+return Item.findByIdAndUpdate(itemId,{borrowerId:null})
+     })
+
+  //4. redirect to the profile page of the loggedin user
+
+  .then (()=> res.redirect (`/profile/${req.session.currentUser.username}`))
+  .catch (err => console.log('error while returning the item'))
+  })
+
+
 
 
 

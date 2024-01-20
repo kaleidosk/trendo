@@ -14,10 +14,6 @@
 <form action="/items/{{_id}}/delete" class="btn btn-primary" method="POST">
       <button>Delete</button>
     </form>
-
-{{!-- <p class="card-text">Category: {{category}}</p>
-<p class="card-text">Description: {{description}}</p>
-<p class="card-text">Price: {{price}} € per day</p> --}}
 </div>
       </div>
     </div>
@@ -37,6 +33,14 @@
 <div class="card" style="width: 18rem;">
 <img src="{{imageUrl}}"class="card-img-top" alt="{{name}}" />
 <h6 class="card-title">Name: {{name}}</h6> 
+<form action="/{{_id}}/comments-create" class="btn btn-primary" method="POST">
+      <button>Leave a comment</button>
+    </form>
+
+
+<form action="/items/{{_id}}/return" class="btn btn-primary" method="POST">
+      <button>Return</button>
+    </form>
 </div>
       </div>
     </div>
