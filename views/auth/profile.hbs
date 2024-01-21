@@ -1,13 +1,15 @@
-{{#if user.username}}
+{{!-- {{#if user.username}}
 <h1>Welcome to your profile page {{user.username}}!</h1>
 <img src="{{user.imageUrl}}" class="img-fluid" alt="{{user.username}}" />
 <div>
 <h1> Available items</h1>
 </div>
+
+<div class="container">
 <div class="row">
 {{#each items}}
 <div class="col-md-4 mb-5">
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 24rem;">
 <img src="{{imageUrl}}"class="card-img-top" alt="{{name}}" />
 <h6 class="card-title">Name: {{name}}</h6> 
 <a href="/items/{{_id}}/edit" class="btn btn-primary">Edit</a>
@@ -16,9 +18,9 @@
     </form>
 </div>
       </div>
-    </div>
 {{/each}}
 <div> 
+  </div>
 {{else}}
   <p>Still not logged in, sorry!</p>
     </div>
@@ -28,13 +30,13 @@
 
 <h1> Rented items</h1>
 <div class="row">
+
 {{#each itemsSelected}}
 <div class="col-md-4 mb-5">
-<div class="card" style="width: 18rem;">
+<div class="card" style="width: 22rem;">
 <img src="{{imageUrl}}"class="card-img-top" alt="{{name}}" />
 <h6 class="card-title">Name: {{name}}</h6> 
-<form action="/{{_id}}/comments-create" class="btn btn-primary" method="POST">
-      <button>Leave a comment</button>
+<a href="/{{_id}}/comments-create" class="btn btn-primary">Leave a comment</a>
     </form>
 
 
@@ -45,4 +47,64 @@
       </div>
     </div>
 {{/each}}
+ --}}
 
+{{#if user.username}}
+  <div class="container">
+    <div class="row">
+      <div class="col-md-3 text-center">
+        <img src="{{user.imageUrl}}" class="img-fluid rounded-circle" alt="{{user.username}}" style="max-width: 100%; height: auto; border: 10px solid #486a8f;" />
+
+      </div>
+      <div class="col-md-9">
+        <h1 class="text-left" style="font-family: 'Helvetica', sans-serif; color: #333; padding-top: 20px;">Welcome to your profile page {{user.username}}!</h1>
+      </div>
+    </div>
+
+  <div class="text-center">
+    <h1 style="font-family: 'Helvetica', sans-serif; color: #333;">Available items</h1>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      {{#each items}}
+        <div class="col-md-4 mb-5">
+          <div class="card" style="height:46em; padding-top: 1em; background: linear-gradient(to bottom, #ECF0F1, #ffffff);">
+            <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" style="padding: 10px;" />
+            <div class="card-body text-center">
+              <h6 class="card-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6> 
+              <a href="/items/{{_id}}/edit" class="btn btn-primary" style="width: 100px; background-color: #486a8f; color: #fff;" >Edit</a>
+              <form action="/items/{{_id}}/delete" method="POST" style="display: inline;">
+                <button class="btn btn-primary"style=" width: 100px; background-color: #486a8f; color: #fff;" >Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+  
+  <div class="text-center">
+    <a href="/item-create" class="btn btn-primary"style=" width: 400px; height: 50px; background-color: #486a8f; color: #fff;">Add a new item</a>
+  </div>
+
+  <h1 class="text-center" style="font-family: 'Helvetica', sans-serif; color: #333; margin-top: 30px;">Rented items</h1>
+  <div class="row">
+    {{#each itemsSelected}}
+      <div class="col-md-4 mb-5">
+        <div class="card" style="width: 22rem; background: linear-gradient(to bottom, #ECF0F1, #ffffff);">
+          <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" style="padding: 10px;" />
+          <div class="card-body text-center">
+            <h6 class="card-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6> 
+            <a href="/{{_id}}/comments-create" style="width: 200px; height: 100px; background-color: #486a8f; color: #fff; display: inline-block; text-align: center; line-height: 100px;text-decoration: none; margin-bottom:1em;">Leave a comment</a>
+            <form action="/items/{{_id}}/return" method="POST" style="display: inline;">
+              <button style="width: 200px; height: 100px; background-color: #486a8f; color: #fff; display: inline-block; text-align: center; line-height: 100px;">Return</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <p class="text-center" style="font-family: 'Helvetica', sans-serif; color: #333; padding-top: 20px;">Still not logged in, sorry!</p>
+{{/if}}

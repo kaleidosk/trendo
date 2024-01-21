@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require("../models/User.model");
 const Item = require("../models/Item.model");
 const fileUploader = require('../config/cloudinary.config');
+const Comment = require('../models/Comment.model');
 //const {isLoggedIn} = require('../middleware/isLoggedIn');
 
 
@@ -46,15 +47,23 @@ router.post("/item-create",fileUploader.single('itemImage'),(req, res) => {
   //GET route to the item detail page
   router.get('/items/:itemId', (req, res)=>{
     const {itemId} = req.params;
-  rs
-  
+  let item = null
     Item.findById(itemId)
         .populate('ownerId')
-        .then((item)=>{
-          console.log('item',item)
-          res.render('items/details',item)   
+        .then((foundItem)=>{
+          item = foundItem
+          console.log('foundItem',foundItem )
         })
-  })
+        .then (()=>{
+        Comment.find({itemCommentId:itemId})
+          .populate ('commenterId')
+          .then ((allComments)=> {
+            console.log('allComments',allComments)
+            res.render('items/details',{allComments,item})   
+          })
+        })  
+        })
+  
 
   //GET route to the item edit page
   router.get('/items/:itemId/edit', (req, res) => {

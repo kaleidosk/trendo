@@ -1,8 +1,20 @@
 {{!-- <h1>{{appTitle}} 🚀</h1> --}}
-<p>Home page</p>
-<h1>Available Items</h1>
+
+<h1 style="font-family: 'Helvetica', sans-serif; color: #333; text-align: center; padding-top: 20px; padding-bottom: 40px">Available Items</h1>
+
+<div class="container">
+<div class="row" style="margin:0em; padding:0em;" >
 
 {{#each items}}
-<img src="{{imageUrl}}" class="img-fluid" alt="{{name}}" />
-    <h3><a href="/items/{{_id}}">{{name}}</a></h3>
+<div class="col-md-4 mb-5" style="height:38em;">
+<div class="card" style="height:36em; padding-top: 1em; background: linear-gradient(to bottom, #ECF0F1, #ffffff);">
+<img src="{{imageUrl}}" style="max-height: 90%; max-width: 80%; margin: 0 auto;" alt="{{name}}" />
+<div class="card-body text-center">
+    <h3><a href="/items/{{_id}}"  class="card-title" style="font-size: 1.5rem; text-decoration: none; color: #333; font-family: 'Helvetica', sans-serif;">{{name}}</a></h3>
+    </div>
+    </div>
+    </div>
 {{/each}}
+</div>
+</div>
+

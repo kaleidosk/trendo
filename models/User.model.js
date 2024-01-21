@@ -21,7 +21,8 @@ const userSchema = new Schema(
       required: true,
     },
     borrowedItems:[{type:Schema.Types.ObjectId, ref:'Item'}],
-    createdItems:[{type:Schema.Types.ObjectId, ref:'Item'}]
+    createdItems:[{type:Schema.Types.ObjectId, ref:'Item'}],
+    // createdComments:[{type:Schema.Types.ObjectId, ref:'Comment'}]
   },
   {
     // this second object adds extra properties: `createdAt` and `updatedAt`
