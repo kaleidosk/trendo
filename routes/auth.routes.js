@@ -137,7 +137,7 @@ router.post("/login", isLoggedOut, (req, res, next) => {
           req.session.currentUser = user.toObject();
           // Remove the password field
           delete req.session.currentUser.password;
-
+        
           res.redirect (`/profile/${user.username}`)
 
           .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
@@ -154,8 +154,10 @@ console.log ('itemsOwned',itemsOwned)
 console.log ('itemsBorrowed',itemsBorrowed) 
 console.log('req.session.currentUser._id',req.session.currentUser._id)
 const { username } = req.params;
+
 let foundUser= await User.findOne({ username })
-res.render('auth/profile', {user: foundUser, items: itemsOwned, itemsSelected:itemsBorrowed})
+foundUser.loggedIn = true;
+res.render('auth/profile', {user: foundUser, items: itemsOwned, itemsSelected:itemsBorrowed,loggedIn: true})
  })
 
 

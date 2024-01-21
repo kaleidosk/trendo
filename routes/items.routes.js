@@ -140,7 +140,7 @@ router.post('/items/:itemId/return', (req,res)=>{
   console.log ('itemId',itemId)
   Item.findById(itemId)
 
-  //1. Show the pagfe
+  //1. Show the page
   //1.remove the item from the array of his borrower
   .then(foundItem=> {
 return User.findByIdAndUpdate({_id:req.session.currentUser._id},{ $pull: { borrowedItems:foundItem._id } })

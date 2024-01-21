@@ -8,10 +8,13 @@ router.get("/", (req, res, next) => {
 //  res.render("index");
 // });
 
-Item.find()
-      .then(allItems => {
-     res.render('index', {items: allItems})
-      })
-    })
+/*Display the available items*/
+
+Item.find({ borrowerId: null })  // Filtrar los items con borrowerId igual a null
+    .then(availableItems => {
+      res.render('index', { items: availableItems });
+    })})
 
 module.exports = router;
+
+/*Display the rented items*/

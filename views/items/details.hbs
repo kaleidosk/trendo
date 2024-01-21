@@ -26,8 +26,14 @@
           <p class="card-text" style="color: #555;">Description: {{item.description}}</p>
           <p class="card-text" style="color: #555;">Price: {{item.price}} € per day</p>
           <p style="color: #777;">Owned by {{item.ownerId.username}}</p>
-          <a href='/items/{{item._id}}/rent' class="btn btn-primary">Select</a>
-          <div>
+<a href='/items/{{item._id}}/rent' class="btn btn-primary" style="width: 400px; height: 50px; background-color: #486a8f; color: #fff;">Select</a>
+
+{{!-- {{#if item.ownerId.username}}
+  <p> </p>
+{{else}}
+  <a href='/items/{{item._id}}/rent' class="btn btn-primary" style="width: 400px; height: 50px; background-color: #486a8f; color: #fff;">Select</a>
+{{/if}} --}}
+
             <h3 style="font-family: 'Helvetica', sans-serif; color: #333; text-align: center; padding-top: 20px; padding-bottom: 40px">Comments:</h3>
             {{#each allComments}}
               <p>{{text}}</p>

@@ -53,11 +53,11 @@
   <div class="container">
     <div class="row">
       <div class="col-md-3 text-center">
-        <img src="{{user.imageUrl}}" class="img-fluid rounded-circle" alt="{{user.username}}" style="max-width: 100%; height: auto; border: 10px solid #486a8f;" />
+     <img src="{{user.imageUrl}}" class="img-fluid rounded-circle" alt="{{user.username}}" style="max-width: 100%; height: auto; border: 10px solid #486a8f;" />
 
       </div>
       <div class="col-md-9">
-        <h1 class="text-left" style="font-family: 'Helvetica', sans-serif; color: #333; padding-top: 20px;">Welcome to your profile page {{user.username}}!</h1>
+        <h1 class="text-left" style="font-family: 'Helvetica', sans-serif; color: #333; padding-top: 20px;"><strong><em>Welcome to your profile page {{user.username}}!</em></strong></h1>
       </div>
     </div>
 
@@ -70,14 +70,14 @@
       {{#each items}}
         <div class="col-md-4 mb-5">
           <div class="card" style="height:46em; padding-top: 1em; background: linear-gradient(to bottom, #ECF0F1, #ffffff);">
-            <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" style="padding: 10px;" />
-            <div class="card-body text-center">
+         <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" style="padding: 10px;" />
+          <div class="card-body text-center">
               <h6 class="card-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6> 
               <a href="/items/{{_id}}/edit" class="btn btn-primary" style="width: 100px; background-color: #486a8f; color: #fff;" >Edit</a>
-              <form action="/items/{{_id}}/delete" method="POST" style="display: inline;">
-                <button class="btn btn-primary"style=" width: 100px; background-color: #486a8f; color: #fff;" >Delete</button>
-              </form>
-            </div>
+            <form action="/items/{{_id}}/delete" method="POST" style="display: inline;">
+                <button class="btn btn-primary"style=" width: 100px; background-color:#486a8f; color: #fff;" >Delete</button>
+            </form>
+           </div>
           </div>
         </div>
       {{/each}}
@@ -96,8 +96,8 @@
           <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" style="padding: 10px;" />
           <div class="card-body text-center">
             <h6 class="card-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6> 
-            <a href="/{{_id}}/comments-create" style="width: 200px; height: 100px; background-color: #486a8f; color: #fff; display: inline-block; text-align: center; line-height: 100px;text-decoration: none; margin-bottom:1em;">Leave a comment</a>
-            <form action="/items/{{_id}}/return" method="POST" style="display: inline;">
+        <a href="/{{_id}}/comments-create" style="width: 200px; height: 100px; background-color: #486a8f; color: #fff; display: inline-block; text-align: center; line-height: 100px;text-decoration: none; margin-bottom:1em;">Leave a comment</a>
+        <form action="/items/{{_id}}/return" method="POST" style="display: inline;">
               <button style="width: 200px; height: 100px; background-color: #486a8f; color: #fff; display: inline-block; text-align: center; line-height: 100px;">Return</button>
             </form>
           </div>
