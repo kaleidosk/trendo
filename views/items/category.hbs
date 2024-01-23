@@ -1,0 +1,31 @@
+<h1>Items in Category: {{category}}</h1>
+
+<div class="container">
+  <div class="row" style="height: 100vh;">
+
+    {{#each items}}
+      <div class="col-md-12 mb-5">
+        <div class="item-container" style="background: linear-gradient(to bottom, #ECF0F1, #ffffff); padding: 20px;">
+          <div class="row align-items-center">
+            <div class="col-md-6">
+              <div class="aspect-ratio aspect-ratio-4x3" style="position: relative; max-width: 100%; max-height: 75%; overflow: hidden;">
+                <div class="image-container">
+                  <img src="{{imageUrl}}" class="item-img" alt="{{name}}" style="width: 50%; height: 50%; object-fit: contain;">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="item-details text-left">
+                <h6 class="item-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6>
+                <p class="item-text" style="color: #555;">Category: {{category}}</p>
+                <p class="item-text" style="color: #555;">Description: {{description}}</p>
+                <p class="item-text" style="color: #555;">Price
+               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+
+  </div>
+</div>

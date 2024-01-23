@@ -12,10 +12,25 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #486a8f;">
   <div class="container-fluid">
-    <form class="d-flex" role="search">
+   <form class="d-flex" action="/items/category" method="GET">
+  <label for="category" style="margin-right: 10px;"></label>
+  <select id="category" name="category">
+    <option value="">All Categories</option>
+    <option value="Bag">Bag</option>
+    <option value="Jacket">Jacket</option>
+    <option value="Hat">Hat</option>
+    <option value="Dress">Dress</option>
+  </select>
+  <button class="btn btn-outline-success" type="submit" style="background-color: #486a8f; color: #fff; border-color:whitesmoke; border-width:1px;">
+    Search
+  </button>
+</form>
+
+
+    {{!-- <form class="d-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success" type="submit" style="background-color: #486a8f; color: #fff; border-color:whitesmoke;border-width:1px;">Search</button>
-    </form>
+    </form> --}}
     
           <a class="nav-link active" style= "margin-right:1em;color:whitesmoke; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"  aria-current="page" href="/">Home</a>
           

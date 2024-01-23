@@ -63,7 +63,20 @@ router.post("/item-create",fileUploader.single('itemImage'),(req, res) => {
   //         })
   //       })  
   //       })
+//Search Bar
+// GET route for searching items by category
+router.get('/items/category', async (req, res) => {
+  try {
+    const { category } = req.query;
+    console.log('req.query.category', req.query.category)
+    const items = await Item.find({ category });
 
+    res.render('items/category', { items, category, user: req.session.currentUser });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+});
   //2GET route to the item detail page
   router.get('/items/:itemId', async (req, res) => {
     try {
@@ -75,7 +88,7 @@ router.post("/item-create",fileUploader.single('itemImage'),(req, res) => {
       }
       const allComments = await Comment.find({ itemCommentId: itemId }).populate('commenterId');
       const isItemOwner = req.session.currentUser ? foundItem.ownerId._id.equals(req.session.currentUser._id) : false;
-  
+      
       res.render('items/details', { allComments, item: foundItem, loggedIn: req.session.currentUser ? true : false ,isItemOwner,user: req.session.currentUser });
     } catch (error) {
       console.error(error);
@@ -194,6 +207,8 @@ return Item.findByIdAndUpdate(itemId,{borrowerId:null})
   .then (()=> res.redirect (`/profile/${req.session.currentUser.username}`))
   .catch (err => console.log('error while returning the item'))
   })
+
+
 
 
 
