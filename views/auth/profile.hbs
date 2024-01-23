@@ -1,53 +1,3 @@
-{{!-- {{#if user.username}}
-<h1>Welcome to your profile page {{user.username}}!</h1>
-<img src="{{user.imageUrl}}" class="img-fluid" alt="{{user.username}}" />
-<div>
-<h1> Available items</h1>
-</div>
-
-<div class="container">
-<div class="row">
-{{#each items}}
-<div class="col-md-4 mb-5">
-<div class="card" style="width: 24rem;">
-<img src="{{imageUrl}}"class="card-img-top" alt="{{name}}" />
-<h6 class="card-title">Name: {{name}}</h6> 
-<a href="/items/{{_id}}/edit" class="btn btn-primary">Edit</a>
-<form action="/items/{{_id}}/delete" class="btn btn-primary" method="POST">
-      <button>Delete</button>
-    </form>
-</div>
-      </div>
-{{/each}}
-<div> 
-  </div>
-{{else}}
-  <p>Still not logged in, sorry!</p>
-    </div>
-{{/if}}
-
-<a href="/item-create" class="btn btn-primary">Add a new item</a>
-
-<h1> Rented items</h1>
-<div class="row">
-
-{{#each itemsSelected}}
-<div class="col-md-4 mb-5">
-<div class="card" style="width: 22rem;">
-<img src="{{imageUrl}}"class="card-img-top" alt="{{name}}" />
-<h6 class="card-title">Name: {{name}}</h6> 
-<a href="/{{_id}}/comments-create" class="btn btn-primary">Leave a comment</a>
-    </form>
-
-
-<form action="/items/{{_id}}/return" class="btn btn-primary" method="POST">
-      <button>Return</button>
-    </form>
-</div>
-      </div>
-    </div>
-{{/each}}
- --}}
 
 {{#if user.username}}
   <div class="container">
@@ -62,28 +12,52 @@
     </div>
 
   <div class="text-center">
-    <h1 style="font-family: 'Helvetica', sans-serif; color: #333;">Available items</h1>
+    <h1 class="font-family: 'Helvetica', sans-serif; text-primary"style="color: #486a8f;" >Available items</h1>
   </div>
 
-  <div class="container">
-    <div class="row">
-      {{#each items}}
-        <div class="col-md-4 mb-5">
-          <div class="card" style="height:46em; padding-top: 1em; background: linear-gradient(to bottom, #ECF0F1, #ffffff);">
-         <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" style="padding: 10px;" />
+  {{!-- <div class="container">
+  <div class="row">
+
+    {{#each items}}
+    <div class="col-md-4 mb-5">
+      <div class="card" style="height: 46em; padding-top: 1em; background: linear-gradient(to bottom, #ECF0F1, #ffffff);">
+        <div class="aspect-ratio aspect-ratio-4x3" style="max-width: 100%; max-height: 75%; overflow: hidden; margin: 0 auto;">
+          <img src="{{imageUrl}}" class="card-img-top aspect-ratio-item" alt="{{name}}" style="width: 100%; height: 100%; object-fit: cover; padding: 10px;">
+        </div>
+        <div class="card-body text-center">
+          <h6 class="card-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6>
+          <a href="/items/{{_id}}/edit" class="btn btn-primary" style="width: 100px; background-color: #486a8f; color: #fff;">Edit</a>
+          <form action="/items/{{_id}}/delete" method="POST" style="display: inline;">
+            <button class="btn btn-primary" style="width: 100px; background-color: #486a8f; color: #fff;">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</div> --}}
+<div class="container">
+  <div class="row">
+    {{#each items}}
+      <div class="col-md-4 mb-5">
+        <div class="card" style="height: 46em; padding-top: 1em; background: linear-gradient(to bottom, #ECF0F1, #ffffff);">
+          <div style="height: 93%; overflow: hidden;">
+            <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" style="width: 100%; height: 100%; object-fit: cover; padding: 10px;">
+          </div>
           <div class="card-body text-center">
-              <h6 class="card-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6> 
-              <a href="/items/{{_id}}/edit" class="btn btn-primary" style="width: 100px; background-color: #486a8f; color: #fff;" >Edit</a>
+            <h6 class="card-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6>
+            <a href="/items/{{_id}}/edit" class="btn btn-primary" style="width: 100px; background-color: #486a8f; color: #fff;">Edit</a>
             <form action="/items/{{_id}}/delete" method="POST" style="display: inline;">
-                <button class="btn btn-primary"style=" width: 100px; background-color:#486a8f; color: #fff;" >Delete</button>
+              <button class="btn btn-primary" style="width: 100px; background-color: #486a8f; color: #fff;">Delete</button>
             </form>
-           </div>
           </div>
         </div>
-      {{/each}}
-    </div>
+      </div>
+    {{/each}}
   </div>
-  
+</div>
+
+
   <div class="text-center">
     <a href="/item-create" class="btn btn-primary"style=" width: 400px; height: 50px; background-color: #486a8f; color: #fff;">Add a new item</a>
   </div>

@@ -10,21 +10,21 @@
   </head>
 
   <body>
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #486a8f;">
   <div class="container-fluid">
     <form class="d-flex" role="search">
       <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+      <button class="btn btn-outline-success" type="submit" style="background-color: #486a8f; color: #fff; border-color:whitesmoke;border-width:1px;">Search</button>
     </form>
     
-          <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"  aria-current="page" href="/">Home</a>
+          <a class="nav-link active" style= "margin-right:1em;color:whitesmoke; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"  aria-current="page" href="/">Home</a>
           
           {{#if loggedIn}}
-          <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/profile/{{user.username}}">Your profile</a>
-          <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/logout">Logout</a>
+          <a class="nav-link active" style= "margin-right:1em;color:whitesmoke; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/profile/{{user.username}}">Your profile</a>
+          <a class="nav-link active" style= "margin-right:1em;color: whitesmoke; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/logout">Logout</a>
           {{else}}
-          <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/signup">Signup</a>
-          <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/login">Login</a>
+          <a class="nav-link active" style= "margin-right:1em;color:whitesmoke; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/signup">Signup</a>
+          <a class="nav-link active" style= "margin-right:1em;color: whitesmoke; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/login">Login</a>
           {{/if}}
   </div>
 </nav>
