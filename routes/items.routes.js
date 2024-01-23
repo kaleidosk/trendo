@@ -91,23 +91,35 @@ router.post("/item-create",fileUploader.single('itemImage'),(req, res) => {
       .catch(error => console.log(`Error while getting an item for edit: ${error}`));
   });
 
-  
+
 // POST route to save changes after updating the item
-router.post('/items/:itemId/edit', fileUploader.single('itemImage'), (req, res) => {
+router.post('/items/:itemId/edit', fileUploader.single('itemImage'), async (req, res) => {
   const { itemId } = req.params;
-  const { name,description, price,category } = req.body;
+  const { name, description, price, category } = req.body;
  
-  let imageUrl;
-  if (req.file) {
-    imageUrl = req.file.path;
-  } else {
-    imageUrl = existingImage;
+  try {
+    let imageUrl;
+
+    if (req.file) {
+      imageUrl = req.file.path;
+    } else {
+      const existingItem = await Item.findById(itemId);
+      imageUrl = existingItem ? existingItem.imageUrl : undefined;
+    }
+
+    const updatedItem = await Item.findByIdAndUpdate(itemId, { name, description, price, category, imageUrl }, { new: true });
+    
+    if (!updatedItem) {
+      return res.status(404).send('Item not found');
+    }
+
+    res.redirect(`/items/${itemId}`);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
   }
- 
-  Item.findByIdAndUpdate(id, { name, description, price,category }, { new: true })
-    .then(() => res.redirect('/items/:itemId'))
-    .catch(error => console.log(`Error while updating a single movie: ${error}`));
 });
+
 
 
 //POST route to delete an item
@@ -116,7 +128,6 @@ const {itemId} =req.params;
 console.log ('itemId',itemId)
 Item.findByIdAndDelete (itemId)
 .then (()=> res.redirect (`/profile/${req.session.currentUser.username}`))
-console.log('req.session.currentUser.username',req.session.currentUser.username)
 .catch (err => console.log('error while deleting the item'))
 })
 
