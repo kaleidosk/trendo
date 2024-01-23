@@ -1,21 +1,5 @@
 <h1 style="font-family: 'Helvetica', sans-serif; color: #333; text-align: center; padding-top: 20px; padding-bottom: 40px;">Item details</h1>
-{{!-- <div class="row">
-   
-<img src="{{item.imageUrl}}"class="card-img-top" alt="{{item.name}}" />
-<h6 class="card-title">Name: {{item.name}}</h6> 
-<p class="card-text">Category: {{item.category}}</p>
-<p class="card-text">Description: {{item.description}}</p>
-<p class="card-text">Price: {{item.price}} € per day</p>
-<p>Owned by {{item.ownerId.username}}</p>
-<a href='/items/{{id}}/rent' class="btn btn-primary">Select</a>
-<div>
-<h3>Comments:</h3>
-{{#each allComments}}
-<p>{{text}}</p>
-<p>{{commenterId.username}}</p>
-{{/each}}
-</div> --}}
-<div class="container">
+{{!-- <div class="container">
   <div class="row justify-content-center align-items-center" style="height: 100vh;">
     <div class="col-md-4 mb-5">
       <div class="card" style="height:46em; padding-top: 1em; background: linear-gradient(to bottom, #ECF0F1, #ffffff);">
@@ -28,11 +12,6 @@
           <p style="color: #777;">Owned by {{item.ownerId.username}}</p>
 <a href='/items/{{item._id}}/rent' class="btn btn-primary" style="width: 400px; height: 50px; background-color: #486a8f; color: #fff;">Select</a>
 
-{{!-- {{#if item.ownerId.username}}
-  <p> </p>
-{{else}}
-  <a href='/items/{{item._id}}/rent' class="btn btn-primary" style="width: 400px; height: 50px; background-color: #486a8f; color: #fff;">Select</a>
-{{/if}} --}}
 
             <h3 style="font-family: 'Helvetica', sans-serif; color: #333; text-align: center; padding-top: 20px; padding-bottom: 40px">Comments:</h3>
             {{#each allComments}}
@@ -42,6 +21,49 @@
             {{/each}}
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div> --}}
+
+
+<div class="container">
+  <div class="row justify-content-center align-items-center" style="height: 100vh;">
+    <div class="col-md-4 mb-5">
+      <div class="card" style="height:46em; padding-top: 1em; background: linear-gradient(to bottom, #ECF0F1, #ffffff);">
+        <img src="{{item.imageUrl}}" class="card-img-top" alt="{{item.name}}" style="padding: 0 20px;" />
+        <div class="card-body text-center">
+          <h6 class="card-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{item.name}}</h6>
+          <p class="card-text" style="color: #555;">Category: {{item.category}}</p>
+          <p class="card-text" style="color: #555;">Description: {{item.description}}</p>
+          <p class="card-text" style="color: #555;">Price: {{item.price}} € per day</p>
+          <p style="color: #777;">Owned by {{item.ownerId.username}}</p>
+</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+{{!-- // Verificar si el usuario está autenticado y si es el propietario --}}
+{{!-- res.render('items/details', { allComments, item: foundItem, isOwner, isCurrentUserOwner: isOwner }); --}}
+  {{#if loggedIn}}
+  {{#unless isItemOwner}}
+    <a href='/items/{{item._id}}/rent' class="btn btn-primary" style="width: 400px; height: 50px; background-color: #486a8f; color: #fff;">Select</a>
+  {{/unless}}
+{{else}}
+  <p>Please login/signup to rent this item</p>
+{{/if}}
+
+        <h3 style="font-family: 'Helvetica', sans-serif; color: #333; text-align: center; padding-top: 20px; padding-bottom: 40px">Comments:</h3>
+        {{#each allComments}}
+          <p>{{text}}</p>
+          <div>by</div>
+          <p>{{commenterId.username}}</p>
+        {{/each}}
       </div>
     </div>
   </div>

@@ -18,11 +18,13 @@
     </form>
     
           <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"  aria-current="page" href="/">Home</a>
-          <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/signup">Signup</a>
-          <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/login">Login</a>
+          
           {{#if loggedIn}}
           <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/profile/{{user.username}}">Your profile</a>
           <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/logout">Logout</a>
+          {{else}}
+          <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/signup">Signup</a>
+          <a class="nav-link active" style= "margin-right:1em;color:#486a8f; font-size:1.5em; text-align: center; font-family: 'Helvetica', sans-serif;"aria-current="page" href="/login">Login</a>
           {{/if}}
   </div>
 </nav>

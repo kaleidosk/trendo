@@ -45,25 +45,43 @@ router.post("/item-create",fileUploader.single('itemImage'),(req, res) => {
   })
   
   //GET route to the item detail page
-  router.get('/items/:itemId', (req, res)=>{
-    const {itemId} = req.params;
-  let item = null
-    Item.findById(itemId)
-        .populate('ownerId')
-        .then((foundItem)=>{
-          item = foundItem
-          console.log('foundItem',foundItem )
-        })
-        .then (()=>{
-        Comment.find({itemCommentId:itemId})
-          .populate ('commenterId')
-          .then ((allComments)=> {
-            console.log('allComments',allComments)
-            res.render('items/details',{allComments,item})   
-          })
-        })  
-        })
+  // router.get('/items/:itemId', (req, res)=>{
+  //   const {itemId} = req.params;
+  // let item = null
+  //   Item.findById(itemId)
+  //       .populate('ownerId')
+  //       .then((foundItem)=>{
+  //         item = foundItem
+  //         console.log('foundItem',foundItem )
+  //       })
+  //       .then (()=>{
+  //       Comment.find({itemCommentId:itemId})
+  //         .populate ('commenterId')
+  //         .then ((allComments)=> {
+  //           console.log('allComments',allComments)
+  //           res.render('items/details',{allComments,item,loggedIn: true, user: req.session.currentUser})   
+  //         })
+  //       })  
+  //       })
+
+  //2GET route to the item detail page
+  router.get('/items/:itemId', async (req, res) => {
+    try {
+      const { itemId } = req.params;
+      const foundItem = await Item.findById(itemId).populate('ownerId');
+      
+      if (!foundItem) {
+        return res.status(404).send('Item not found');
+      }
+      const allComments = await Comment.find({ itemCommentId: itemId }).populate('commenterId');
+      const isItemOwner = req.session.currentUser ? foundItem.ownerId._id.equals(req.session.currentUser._id) : false;
   
+      res.render('items/details', { allComments, item: foundItem, loggedIn: req.session.currentUser ? true : false ,isItemOwner,user: req.session.currentUser });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  });
 
   //GET route to the item edit page
   router.get('/items/:itemId/edit', (req, res) => {
