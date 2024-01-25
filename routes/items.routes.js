@@ -44,25 +44,7 @@ router.post("/item-create",fileUploader.single('itemImage'),(req, res) => {
     });
   })
   
-  //GET route to the item detail page
-  // router.get('/items/:itemId', (req, res)=>{
-  //   const {itemId} = req.params;
-  // let item = null
-  //   Item.findById(itemId)
-  //       .populate('ownerId')
-  //       .then((foundItem)=>{
-  //         item = foundItem
-  //         console.log('foundItem',foundItem )
-  //       })
-  //       .then (()=>{
-  //       Comment.find({itemCommentId:itemId})
-  //         .populate ('commenterId')
-  //         .then ((allComments)=> {
-  //           console.log('allComments',allComments)
-  //           res.render('items/details',{allComments,item,loggedIn: true, user: req.session.currentUser})   
-  //         })
-  //       })  
-  //       })
+
 //Search Bar
 // GET route for searching items by category
 router.get('/items/category', async (req, res) => {
@@ -86,10 +68,24 @@ router.get('/items/category', async (req, res) => {
       if (!foundItem) {
         return res.status(404).send('Item not found');
       }
-      const allComments = await Comment.find({ itemCommentId: itemId }).populate('commenterId');
+      const allComments = await Comment.find({ itemCommentId: itemId })
+  .populate({
+    path: 'commenterId',
+    model: 'User'
+  })
+  .populate({
+    path: 'itemCommentId',
+    model: 'Item',
+    populate: {
+      path: 'borrowerId',
+      model: 'User'
+    }
+  });
+
       const isItemOwner = req.session.currentUser ? foundItem.ownerId._id.equals(req.session.currentUser._id) : false;
-      
-      res.render('items/details', { allComments, item: foundItem, loggedIn: req.session.currentUser ? true : false ,isItemOwner,user: req.session.currentUser });
+      const isItemBorrowed = req.session.currentUser ? foundItem.borrowerId?._id.equals(req.session.currentUser._id) : false;
+
+      res.render('items/details', { allComments, item: foundItem, loggedIn: req.session.currentUser ? true : false ,isItemOwner,user: req.session.currentUser,isItemBorrowed});
     } catch (error) {
       console.error(error);
       res.status(500).send('Internal Server Error');
@@ -207,11 +203,6 @@ return Item.findByIdAndUpdate(itemId,{borrowerId:null})
   .then (()=> res.redirect (`/profile/${req.session.currentUser.username}`))
   .catch (err => console.log('error while returning the item'))
   })
-
-
-
-
-
 
 
 module.exports = router;

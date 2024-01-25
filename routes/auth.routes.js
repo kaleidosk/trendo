@@ -159,22 +159,6 @@ let foundUser= await User.findOne({ username })
 foundUser.loggedIn = true;
 res.render('auth/profile', {user: foundUser, items: itemsOwned, itemsSelected:itemsBorrowed,loggedIn: true})
  })
-
-
-      
-//GET PROFILE PAGE ROUTE
-// router.get("/profile/:username",isLoggedIn, async (req, res, next) => {
-// let itemsOwned= await Item.find({ownerId:req.session.currentUser._id})
-// let itemsBorrowed= await Item.find({borrowerId:req.session.currentUser._id})
-// console.log ('itemsOwned',itemsOwned)
-// console.log ('itemsBorrowed',itemsBorrowed) 
-// console.log('req.session.currentUser._id',req.session.currentUser._id)
-// const { username } = req.params;
-// let foundUser= await User.findOne({ username })
-// res.render('auth/profile', {user: foundUser, items: itemsOwned, itemsSelected:itemsBorrowed})
-// })
-
-
     
 // GET /auth/logout
 router.get("/logout", isLoggedIn, (req, res) => {

@@ -1,83 +1,58 @@
-<h1 style="font-family: 'Helvetica', sans-serif; color: #333; text-align: center; padding-top: 20px; padding-bottom: 40px;">Item details</h1>
 
-{{!-- <div class="container">
-  <div class="row" style="height: 100vh;">
-    <div class="col-md-12 mb-5">
-      <div class="item-container" style="background: linear-gradient(to bottom, #ECF0F1, #ffffff); padding: 20px;">
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <div class="aspect-ratio aspect-ratio-4x3" style="position: relative; max-width: 100%; max-height: 75%; overflow: hidden;">
-              <div class="image-container">
-                <img src="{{item.imageUrl}}" class="item-img" alt="{{item.name}}" style="width: 100%; height: 100%; object-fit: contain;">
-              </div>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <div class="item-details text-left">
-              <h6 class="item-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{item.name}}</h6>
-              <p class="item-text" style="color: #555;">Category: {{item.category}}</p>
-              <p class="item-text" style="color: #555;">Description: {{item.description}}</p>
-              <p class="item-text" style="color: #555;">Price: {{item.price}} € per day</p>
-              <p style="color: #777;">Owned by {{item.ownerId.username}}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+<h1
+  style="font-family: 'Helvetica', sans-serif; color: #333; text-align: center; padding-top: 20px; padding-bottom: 40px;">
+  Item details</h1>
 
-
-
-{{#if loggedIn}}
-  {{#unless isItemOwner}}
-    <a href='/items/{{item._id}}/rent' class="btn btn-primary" style="width: 400px; height: 50px; background-color: #486a8f; color: #fff;">Select</a>
-  {{/unless}}
-{{else}}
-  <p class="font-italic" style="font-size: 40px; color: #486a8f; margin-bottom: 15px;">Please login/signup to rent this item</p>
-{{/if}}
-
-
-        <h3 style="font-family: 'Helvetica', sans-serif; color: #333; text-align: center; padding-top: 20px; padding-bottom: 40px">Comments:</h3>
-        {{#each allComments}}
-          <p>{{text}}</p>
-          <div>by</div>
-          <p>{{commenterId.username}}</p>
-        {{/each}}
-      </div>
-    </div>
-  </div>
-</div> --}}
 <div class="container">
-    <div class="row" style="height: 100vh;">
-        <div class="col-md-6">
-            <div class="aspect-ratio aspect-ratio-4x3" style="position: relative; max-width: 100%; max-height: 100%; overflow: hidden; margin-bottom: 10px;">
-                <div class="image-container">
-                    <img src="{{item.imageUrl}}" class="item-img" alt="{{item.name}}" style="width: 100%; height: 100%; object-fit: contain;">
-                </div>
-            </div>
-            {{#if loggedIn}}
-                {{#unless isItemOwner}}
-                    <a href='/items/{{item._id}}/rent' class="btn btn-primary" style="width: 400px; height: 50px; background-color: #486a8f; color: #fff; margin-top: 20px;">Select</a>
-                {{/unless}}
-            {{else}}
-                <p class="font-italic" style="font-size: 40px; color: #486a8f; margin-bottom: 15px; margin-top: 20px;">Please login/signup to rent this item</p>
-            {{/if}}
+  <div class="row" style="height: 100vh;">
+    <div class="col-md-6">
+      <div class="aspect-ratio aspect-ratio-4x3"
+        style="position: relative; max-width: 100%; max-height: 100%; overflow: hidden; margin-bottom: 10px;">
+        <div class="image-container">
+          <img src="{{item.imageUrl}}" class="item-img" alt="{{item.name}}"
+            style="width: 100%; height: 100%; object-fit: contain;">
         </div>
-        <div class="col-md-6">
-            <div class="item-details text-left" style="margin-bottom: 20px; margin-left: 20px;">
-                <h6 class="item-title" style="font-size: 1.3rem; color: #333; font-family: 'Helvetica', sans-serif; margin-bottom: 5px; margin-top:5px; padding-top:20px;">Name: {{item.name}}</h6>
-                <p class="item-text" style="color: #555; margin-bottom: 5px; font-size: 1rem;">Category: {{item.category}}</p>
-                <p class="item-text" style="color: #555; margin-bottom: 5px; font-size: 1rem;">Description: {{item.description}}</p>
-                <p class="item-text" style="color: #555; margin-bottom: 5px; font-size: 1rem;">Price: {{item.price}} € per day</p>
-                <p style="color: #777; margin-bottom: 15px; font-size: 1.5rem;">Owned by {{item.ownerId.username}}</p>
-            </div>
-            <h3 style="font-family: 'Helvetica', sans-serif; color: #333; padding-top: 20px; padding-bottom: 20px;">Comments:</h3>
-            {{#each allComments}}
-                <p>{{text}}</p>
-                <div>by</div>
-                <p>{{commenterId.username}}</p>
-            {{/each}}
-        </div>
+      </div>
+      {{#if loggedIn}}
+      {{#unless isItemOwner}}
+      {{#if isItemBorrowed}}
+      <form action="/items/{{item._id}}/return" method="POST" class="return-form" style="display: inline;">
+        <button class="btn btn-primary return-btn"
+          style="width: 200px; height: 100px; background-color: #486a8f; color: #fff; display: inline-block; text-align: center; line-height: 100px;">Return</button>
+      </form>
+      {{else}}
+      <a href='/items/{{item._id}}/rent' class="btn btn-primary"
+        style="width: 400px; height: 50px; background-color: #486a8f; color: #fff; margin-top: 20px;">Select</a>
+
+      {{/if}}
+
+      {{/unless}}
+
+
+      {{else}}
+      <p class="font-italic" style="font-size: 40px; color: #486a8f; margin-bottom: 15px; margin-top: 20px;">Please
+        login/signup to rent this item</p>
+      {{/if}}
     </div>
+    <div class="col-md-6">
+      <div class="item-details text-left" style="margin-bottom: 20px; margin-left: 20px;">
+        <h6 class="item-title"
+          style="font-size: 1.3rem; color: #333; font-family: 'Helvetica', sans-serif; margin-bottom: 5px; margin-top:5px; padding-top:20px;">
+          Name: {{item.name}}</h6>
+        <p class="item-text" style="color: #555; margin-bottom: 5px; font-size: 1rem;">Category: {{item.category}}</p>
+        <p class="item-text" style="color: #555; margin-bottom: 5px; font-size: 1rem;">Description: {{item.description}}
+        </p>
+        <p class="item-text" style="color: #555; margin-bottom: 5px; font-size: 1rem;">Price: {{item.price}} € per day
+        </p>
+        <p style="color: #777; margin-bottom: 15px; font-size: 1.5rem;">Owned by {{item.ownerId.username}}</p>
+      </div>
+      <h3 style="font-family: 'Helvetica', sans-serif; color: #333; padding-top: 20px; padding-bottom: 20px;">Comments:
+      </h3>
+      {{#each allComments}}
+      <p>{{text}}</p>
+      <div>by</div>
+      <p>{{commenterId.username}}</p>
+      {{/each}}
+    </div>
+  </div>
 </div>
