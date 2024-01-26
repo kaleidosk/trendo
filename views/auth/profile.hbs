@@ -1,63 +1,71 @@
 
 {{#if user.username}}
-  <div class="container profile-container" style="background-color: #ECF0F1; padding-top: 20px;">
-    <div class="row">
-      <div class="col-md-3 text-center profile-info" style="background-color: #ECF0F1; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
-        <div class="profile-bg">
-          <img src="{{user.imageUrl}}" class="img-fluid rounded-square" alt="{{user.username}}" style="width: 100%; height: auto; border: none;" />
-        </div>
-      </div>
-      <div class="col-md-9">
-        <h1 class="text-left welcome-message" style="font-family: 'Helvetica', sans-serif; color: #486a8f;">Welcome to your profile page {{user.username}}!</h1>
+ <div class="container profile-container" style="background-color: #ECF0F1; padding-top: 20px;margin-bottom:2em;margin-top:4em;border-radius: 10px;">
+  <div class="row">
+    <div class="col-md-9 order-md-last">
+      <h1 class="welcome-message" style="font-family: 'Helvetica', sans-serif; color: #486a8f; font-size: 2rem;margin-top:3em;">Welcome to your profile page</br> {{user.username}}!</h1>
+    </div>
+    <div class="col-md-3 order-md-first text-center profile-info" style="background-color: #ECF0F1; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+      <div class="profile-bg" style="width: 100%; max-width: 200px; height: auto; overflow: hidden; margin: 0 auto;">
+        <img src="{{user.imageUrl}}" class="img-fluid rounded-square" alt="{{user.username}}" style="width: 90%; height: 90%; object-fit: cover; border: none;" />
       </div>
     </div>
+  </div>
+</div>
 
-    <div class="text-center">
-      <h1 class="available-items-heading" style="color: #486a8f; background-color: #ECF0F1; padding: 10px; border-radius: 10px; margin-top: 20px;">Available items</h1>
-    </div>
+    <div class="container" style="background-color: #ECF0F1; border-radius: 10px; text-align: center; padding-bottom:4em;">
+  <h1 class="available-items-heading" style="color: #486a8f; background-color: #ECF0F1; padding: 10px; border-radius: 10px; font-size: 2.5em; margin-top: 1.5em; margin-bottom:2em;margin-bottom:1.5em;padding-top:1.4em;">Available items</h1>
 
-    <div class="container" style="background-color: #ECF0F1; border-radius: 10px; margin-top: -20px;">
       <div class="row">
         {{#each items}}
-          <div class="col-md-4 mb-5">
-            <div class="card item-card" style="height: 46em; padding-top: 1em; background: linear-gradient(to bottom, #ECF0F1, #ffffff); border-radius: 10px;">
-              <div style="height: 93%; overflow: hidden;">
-                <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" style="width: 100%; height: 100%; object-fit: cover; padding: 10px;">
-              </div>
-              <div class="card-body text-center">
-                <h6 class="card-title item-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6>
-                <a href="/items/{{_id}}/edit" class="btn btn-primary edit-btn" style="width: 100px; background-color: #fff; color: #486a8f; border: 2px solid #486a8f;">Edit</a>
-                <form action="/items/{{_id}}/delete" method="POST" class="delete-form" style="display: inline;">
-                  <button class="btn btn-primary delete-btn" style="width: 100px; background-color: #486a8f; color: #fff; border: 2px solid #fff;">Delete</button>
-                </form>
-              </div>
-            </div>
-          </div>
-        {{/each}}
+         <div class="col-md-4 mb-0" style="max-width:28em";>
+  <div class="card item-card" style="width: 100%; height: 80%; background: linear-gradient(to bottom, #ECF0F1, #ffffff); border-radius: 10px; overflow: hidden;padding-top:2em;">
+    <div style="height: 60%; overflow: hidden;">
+      <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" style="width: 90%; height: 90%; object-fit: contain;">
+    </div>
+    <div class="card-body text-center" style="height: 40%;">
+      <h6 class="card-title item-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6>
+      <div class="button-container" style="display: flex; justify-content: space-around; margin-top: 1em;padding: bottom -4em;">
+        <a href="/items/{{_id}}/edit" class="btn btn-primary edit-btn" style="flex: 1; background-color: #fff; color: #486a8f; border: 2px solid #486a8f;">Edit</a>
+        <form action="/items/{{_id}}/delete" method="POST" class="delete-form" style="flex: 1;">
+          <button class="btn btn-primary delete-btn" style="width: 100%; background-color: #486a8f; color: #fff; border: 2px solid #fff;">Delete</button>
+        </form>
       </div>
     </div>
+  </div>
+</div>
+        {{/each}}
+      </div>
+      <div>  
+    <a href="/item-create" class="btn btn-primary add-item-btn" style="width: 100%; height: 70px; background-color: #486a8f; color: #fff; border: 2px solid #486a8f; font-size: 20px; text-align: center; display: flex; align-items: center; justify-content: center; text-decoration: none;">Add a new item</a>
 
-    <div class="text-center">
-      <a href="/item-create" class="btn btn-primary add-item-btn" style="width: 400px; height: 50px; background-color: #486a8f; color: #fff; margin-top: 20px;">Add a new item</a>
+
     </div>
+    </div>
+    
+<div class="container" style="background-color: #ECF0F1; border-radius: 10px; text-align: center; padding-bottom:4em;">
+    <h1 class="text-center rented-items-heading" style="font-family: 'Helvetica', sans-serif; color: #486a8f; margin-top: 2em;padding-top:1em;">Rented items</h1>
+<div class="row" style="padding-bottom: 1em;">
+  {{#each itemsSelected}}
+    <div class="col-md-4 mb-0" style="max-width: 350px; margin-bottom: -4em;">
+      <div class="card item-card" style="height: 46em; background: linear-gradient(to bottom, #ECF0F1, #ffffff); border-radius: 10px; overflow: hidden;">
+        <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" style="width: 100%; height: 70%; object-fit: contain; padding: 10px;">
+        <div class="card-body text-center" style="height: 30%;">
+          <h6 class="card-title item-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6>
+        <div class="button-container" style="display: flex; flex-direction: column; margin-top: 1em; padding-bottom: -4em;">
+    <a href="/{{_id}}/comments-create" class="btn btn-primary leave-comment-btn" style="flex: 1; background-color: #486a8f;border-color:#486a8f; text-decoration: none; display: inline-block; width: 100%;margin-bottom:1em;">Leave a comment</a>
+    <form action="/items/{{_id}}/return" method="POST" class="return-form" style="flex: 1;">
+        <button class="btn btn-primary return-btn" style="width: 100%; background-color: #fff; color: #486a8f; display: inline-block;border-color:#486a8f;">Return</button>
+    </form>
+</div>
 
-    <h1 class="text-center rented-items-heading" style="font-family: 'Helvetica', sans-serif; color: #486a8f; margin-top: 30px;">Rented items</h1>
-    <div class="row">
-      {{#each itemsSelected}}
-        <div class="col-md-4 mb-5">
-          <div class="card rented-item-card" style="width: 22rem; background: linear-gradient(to bottom, #ECF0F1, #ffffff); border-radius: 10px;">
-            <img src="{{imageUrl}}" class="card-img-top" alt="{{name}}" style="padding: 10px;" />
-            <div class="card-body text-center">
-              <h6 class="card-title rented-item-title" style="font-size: 1.2rem; color: #333; font-family: 'Helvetica', sans-serif;">Name: {{name}}</h6> 
-              <a href="/{{_id}}/comments-create" class="btn btn-primary leave-comment-btn" style="width: 200px; height: 100px; background-color: #486a8f; color: #fff; display: inline-block; text-align: center; line-height: 100px;text-decoration: none; margin-bottom:1em;">Leave a comment</a>
-              <form action="/items/{{_id}}/return" method="POST" class="return-form" style="display: inline;">
-                <button class="btn btn-primary return-btn" style="width: 200px; height: 100px; background-color: #486a8f; color: #fff; display: inline-block; text-align: center; line-height: 100px;">Return</button>
-              </form>
-            </div>
           </div>
         </div>
-      {{/each}}
+      </div>
     </div>
+    </div>
+  {{/each}}
+</div>
   </div>
 {{else}}
   <p class="text-center not-logged-in-message" style="font-family: 'Helvetica', sans-serif; color: #333; padding-top: 20px;">Still not logged in, sorry!</p>

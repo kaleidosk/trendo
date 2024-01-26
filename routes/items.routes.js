@@ -6,7 +6,6 @@ const fileUploader = require('../config/cloudinary.config');
 const Comment = require('../models/Comment.model');
 //const {isLoggedIn} = require('../middleware/isLoggedIn');
 
-
 // **********************************
 // GET route to display the form to create a new item
 // localhost:3000/item-create
@@ -129,8 +128,6 @@ router.post('/items/:itemId/edit', fileUploader.single('itemImage'), async (req,
   }
 });
 
-
-
 //POST route to delete an item
 router.post('/items/:itemId/delete', (req,res)=>{
 const {itemId} =req.params;
@@ -139,7 +136,6 @@ Item.findByIdAndDelete (itemId)
 .then (()=> res.redirect (`/profile/${req.session.currentUser.username}`))
 .catch (err => console.log('error while deleting the item'))
 })
-
 
 //GET route to rent an item
 router.get ('/items/:itemId/rent',(req,res,next)=>{
@@ -178,12 +174,12 @@ router.post('/items/:itemId/return', (req,res)=>{
   console.log ('itemId',itemId)
   Item.findById(itemId)
 
-  //1. Show the page
-  //1.remove the item from the array of his borrower
+//1. Show the page
+//1.remove the item from the array of his borrower
   .then(foundItem=> {
 return User.findByIdAndUpdate({_id:req.session.currentUser._id},{ $pull: { borrowedItems:foundItem._id } })
  })
-  //2. push the item in the createdItems of the owner
+//2. push the item in the createdItems of the owner
   Item.findById(itemId)
      .then(foundItem=> {
       console.log ('foundItem',foundItem)    
@@ -198,8 +194,7 @@ Item.findById(itemId)
 return Item.findByIdAndUpdate(itemId,{borrowerId:null})
      })
 
-  //4. redirect to the profile page of the loggedin user
-
+//4. redirect to the profile page of the loggedin user
   .then (()=> res.redirect (`/profile/${req.session.currentUser.username}`))
   .catch (err => console.log('error while returning the item'))
   })
